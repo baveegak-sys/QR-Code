@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Secure Family Tracking</title>
+<style>
+:root{--bg:#020b14;--panel:#081a29;--cyan:#55ddff;--mint:#79f0c2;--violet:#9b8cff;--red:#ff6178;--text:#f6fbff;--muted:#9db4c5}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+body{background:radial-gradient(circle at 20% 8%,#0a527044,transparent 28%),radial-gradient(circle at 80% 15%,#174d6740,transparent 24%),#020b14}
+.wrap{width:100%;max-width:520px;margin:auto;padding:22px 16px 40px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:950;font-size:17px;letter-spacing:-.04em;white-space:nowrap}.brand i{font-style:normal;color:var(--mint)}.showcase{font-size:9px;letter-spacing:.15em;border:1px solid #2a526a;border-radius:999px;padding:8px 10px;color:#b8d5e5;white-space:nowrap}
+.hero{text-align:center;padding:38px 6px 27px}.kicker{font-size:10px;letter-spacing:.22em;color:var(--mint);font-weight:900;line-height:1.6}.hero h1{margin:15px auto 14px;font-size:clamp(38px,11vw,52px);line-height:1.04;letter-spacing:-.055em;padding:0 2px 5px;background:linear-gradient(100deg,#f8fdff,#bdefff 55%,#85f2c9);-webkit-background-clip:text;background-clip:text;color:transparent;overflow:visible}.hero p{margin:auto;max-width:390px;color:var(--muted);font-size:14px;line-height:1.65}
+.journey{position:relative;border:1px solid #214b63;border-radius:28px;background:linear-gradient(160deg,#081a29,#071624);padding:112px 14px 30px;overflow:hidden;box-shadow:0 25px 70px #0008,inset 0 0 60px #0d557026}
+.journey:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.25;background-image:linear-gradient(#fff08 1px,transparent 1px),linear-gradient(90deg,#fff08 1px,transparent 1px);background-size:28px 28px}
+.status{position:absolute;z-index:8;left:14px;top:16px;display:flex;align-items:center;gap:7px;border:1px solid #315d75;background:#06131eea;border-radius:999px;padding:9px 11px;font-size:9px;font-weight:900;white-space:nowrap}.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:blink 1.3s infinite}@keyframes blink{50%{opacity:.35}}
+.sos{position:absolute;z-index:8;right:14px;top:59px;border:1px solid #a13e50;background:#2a1019eb;border-radius:999px;padding:9px 11px;font-size:9px;white-space:nowrap;animation:sos 2s infinite}@keyframes sos{50%{box-shadow:0 0 22px #ff617844}}
+.flow{position:relative;z-index:3;max-width:430px;margin:auto}
+.step{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:center;padding-bottom:27px}
+.step:not(:last-child):before{content:"";position:absolute;z-index:0;left:30px;top:57px;bottom:-3px;width:5px;border-radius:9px;background:linear-gradient(var(--mint),var(--cyan),var(--violet));box-shadow:0 0 14px #55ddff77}
+.step:not(:last-child):after{content:"";position:absolute;z-index:1;left:29px;top:64px;bottom:3px;width:7px;background:repeating-linear-gradient(to bottom,#efffff 0 8px,transparent 8px 16px);opacity:.58;animation:route 1s linear infinite}@keyframes route{to{background-position:0 32px}}
+.marker{position:relative;z-index:4;width:62px;height:62px;border-radius:20px;display:grid;place-items:center;background:linear-gradient(135deg,#68dcf4,#7bf0c3);border:3px solid #ecffff;color:#03131c;font-size:18px;font-weight:950;box-shadow:0 0 0 0 #69ebd066,0 0 25px #55ddff55;animation:pulse 2.2s infinite}@keyframes pulse{70%{box-shadow:0 0 0 16px #69ebd000,0 0 25px #55ddff55}}
+.start .marker{background:#071924;color:#fff;border-color:var(--mint);font-size:25px}.finish .marker{background:#071924;color:#fff;border-color:var(--violet);font-size:24px}
+.info{min-width:0}.endpointTitle{font-size:13px;letter-spacing:.13em;font-weight:950}.endpointSub{font-size:10px;color:var(--muted);margin-top:4px}
+.card{min-height:128px;border:1px solid #31566c;border-radius:19px;background:#05131fe8;padding:17px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;box-shadow:0 12px 30px #0005}.card strong{font-size:17px;line-height:1.25;margin-bottom:5px}.card span{font-size:10px;color:var(--muted);margin-bottom:14px}.card a{display:inline-block;text-decoration:none;color:#03121b;background:linear-gradient(90deg,var(--mint),var(--cyan));padding:9px 12px;border-radius:10px;font-size:10px;font-weight:950}
+.car{position:absolute;z-index:7;left:17px;top:70px;font-size:25px;filter:drop-shadow(0 0 9px #55ddff);animation:drive 13s linear infinite;pointer-events:none}
+@keyframes drive{
+0%,5%{top:160px;transform:translateY(0)}
+22%{top:310px}40%{top:475px}58%{top:640px}76%{top:805px}94%,100%{top:970px}
+}
+.routeLabel{text-align:center;color:#718fa2;font-size:8px;letter-spacing:.12em;margin-top:2px}
+footer{text-align:center;color:#66879b;font-size:9px;letter-spacing:.12em;margin-top:28px;line-height:1.7}
+@media(max-width:390px){.wrap{padding-left:10px;padding-right:10px}.journey{padding-left:10px;padding-right:10px}.step{grid-template-columns:56px minmax(0,1fr);gap:10px}.marker{width:54px;height:54px;border-radius:17px}.step:not(:last-child):before{left:26px;top:51px}.step:not(:last-child):after{left:25px;top:58px}.card{padding:14px;min-height:122px}.card strong{font-size:15px}.hero h1{font-size:39px}.status,.sos{font-size:8px}.car{left:14px}}
+@media(min-width:700px){.wrap{max-width:1050px}.hero h1{font-size:66px}.journey{padding:115px 50px 35px}.flow{max-width:700px}.step{grid-template-columns:70px 1fr}.card{min-height:120px}}
+</style>
+<style>
+@media(max-width:600px){
+  .wrap{padding:18px 12px 36px}
+  .hero{padding:32px 8px 24px}
+  .hero h1{
+    font-size:clamp(38px,10.5vw,48px);
+    line-height:1.02;
+    margin:13px auto 16px;
+    padding-bottom:7px;
+  }
+  .hero p{font-size:13.5px;line-height:1.65;max-width:410px}
+
+  .journey{
+    padding:126px 16px 30px;
+    border-radius:27px;
+  }
+
+  /* Status controls are now one balanced top row */
+  .status,.sos{
+    top:20px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 11px;
+    font-size:8px;
+  }
+  .status{left:16px}
+  .sos{right:16px}
+
+  .flow{margin-top:4px}
+
+  /* Same geometry for every point in the journey */
+  .step{
+    grid-template-columns:72px minmax(0,1fr);
+    gap:14px;
+    padding-bottom:28px;
+    align-items:center;
+  }
+  .marker{
+    width:64px;height:64px;
+    margin-left:2px;
+  }
+  .step:not(:last-child):before{
+    left:33px;
+    top:61px;
+    bottom:-4px;
+  }
+  .step:not(:last-child):after{
+    left:32px;
+    top:68px;
+    bottom:3px;
+  }
+
+  .start,.finish{min-height:82px}
+  .start .info,.finish .info{padding-left:2px}
+  .endpointTitle{font-size:13px;line-height:1.25}
+  .endpointSub{font-size:9.5px;line-height:1.45;margin-top:5px}
+
+  .card{
+    min-height:126px;
+    padding:16px 17px;
+    border-radius:18px;
+  }
+  .card strong{font-size:16px}
+  .card span{font-size:10px}
+  .card a{font-size:10px;padding:9px 12px}
+
+  /* Car stays exactly on the vertical route line */
+  .car{
+    left:24px;
+    width:24px;
+    text-align:center;
+    font-size:22px;
+    transform:translateX(0);
+    animation:driveFixed 14s linear infinite;
+  }
+  @keyframes driveFixed{
+    0%,4%{top:185px}
+    22%{top:340px}
+    40%{top:495px}
+    58%{top:650px}
+    76%{top:805px}
+    94%,100%{top:955px}
+  }
+}
+@media(max-width:390px){
+  .journey{padding-left:12px;padding-right:12px}
+  .status,.sos{font-size:7.5px;padding:0 8px}
+  .status{left:12px}.sos{right:12px}
+  .step{grid-template-columns:62px minmax(0,1fr);gap:9px}
+  .marker{width:56px;height:56px;margin-left:1px}
+  .step:not(:last-child):before{left:28px;top:54px}
+  .step:not(:last-child):after{left:27px;top:61px}
+  .car{left:20px;font-size:20px}
+  .card{padding:14px 13px}
+  .card strong{font-size:15px}
+}
+</style>
+</head>
+<body><main class="wrap">
+<nav><div class="brand">SECURE<i>TRACK</i></div><div class="showcase">PROJECT SHOWCASE</div></nav>
+<section class="hero"><div class="kicker">CONNECTED SAFETY • SMART MOBILITY</div><h1>Secure Family<br>Tracking</h1><p>Tracking, routing and emergency alerts brought together in one connected safety system.</p></section>
+<section class="journey">
+<div class="status"><span class="dot"></span>LIVE GPS • BEST ROUTE ACTIVE</div>
+<div class="sos">🚨 EMERGENCY ALERT READY</div>
+<div class="flow">
+<div class="step start"><div class="marker">🚀</div><div class="info"><div class="endpointTitle">PROJECT START</div><div class="endpointSub">The connected safety journey begins</div></div></div>
+<div class="step"><div class="marker">BA</div><div class="card"><strong>Baveega Abishan</strong><span>Project Team Member</span><a href="https://www.linkedin.com/in/baveega-abishan" target="_blank" rel="noopener">in&nbsp; LinkedIn ↗</a></div></div>
+<div class="step"><div class="marker">SN</div><div class="card"><strong>Sundar Nagarkoti</strong><span>Project Team Member</span><a href="https://www.linkedin.com/in/sundar2024" target="_blank" rel="noopener">in&nbsp; LinkedIn ↗</a></div></div>
+<div class="step"><div class="marker">PL</div><div class="card"><strong>Prabesh Lamichhane</strong><span>Project Team Member</span><a href="https://www.linkedin.com/in/prabesh-lamichhane-996627169" target="_blank" rel="noopener">in&nbsp; LinkedIn ↗</a></div></div>
+<div class="step"><div class="marker">DD</div><div class="card"><strong>Dipra Das</strong><span>Project Team Member</span><a href="https://www.linkedin.com/in/dipra-das5940" target="_blank" rel="noopener">in&nbsp; LinkedIn ↗</a></div></div>
+<div class="step finish"><div class="marker">🏁</div><div class="info"><div class="endpointTitle">PROJECT FINISH</div><div class="endpointSub">Secure tracking, routing and emergency response connected</div></div></div>
+</div>
+<div class="car">🚗</div>
+<!-- <div class="routeLabel">START → TEAM JOURNEY → TRACKING → ROUTING → SAFETY → FINISH</div> -->
+</section>
+<footer>SECURE FAMILY TRACKING • TRACKING • ROUTING • EMERGENCY ALERT SYSTEM</footer>
+</main></body></html>
